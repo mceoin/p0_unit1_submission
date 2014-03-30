@@ -41,4 +41,3 @@ describe 'sentence_maker' do
     sentence_maker(second_sentence).should eq "Alaska has over 586 thousand miles."
   end
 end
-
