@@ -18,6 +18,19 @@ describe Array do
         long_array.pad!(10)
       }.to_not change(long_array, :length)
     end
+    
+    it "doesn't pad when minimum size is equal to the array's length" do
+      all_arrays.each do |array|
+        array.pad!(array.length).should eq(array)
+      end
+    end
+
+    it "doesn't pad when the minimum size is 0" do
+      all_arrays.each do |array|
+        array.pad!(0).should eq(array)
+      end
+    end
+
   end
 
   describe "#pad" do
