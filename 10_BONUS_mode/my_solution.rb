@@ -47,12 +47,14 @@ def mode(array)
     freq = Hash.new(0)
     array.each { |element| freq[element] +=1 } # create hash object:frequency
     freq = freq.sort_by { |x,y| y }.reverse! # sort-largest value frequency 1st
-    freq.keep_if { |x,y| y == freq[0][1] }.flatten! # keep keys w/largest values
+    freq.keep_if { |x,y| y == freq[0][1] }.flatten!.uniq! # keep keys w/largest values 
     return freq.select {|x| freq.index(x).even?}.sort #sort only the keys
 end
 
 # 4. Reflection 
 # Man, Jon and I had great fun on this one. We got that "hit" after solving what we thought were our initial hash problems... and then we tested and it turned out that we were pretty far off the mark. Jon seemed pretty good with hashes and loops, while I have learned from ... not being great at much anything so far that the best way to figure out what's going on is to break it down line by line once you think you have a solution and to test your code in chunks... only that way can you identify what the problem is.
+#(Kevin Kang served up the uniq!)
+
 
 # Things I need to get better at:
 # *understanding ruby methods (knowing them by heart really expands my options for solving problems)
