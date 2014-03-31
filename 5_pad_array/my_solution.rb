@@ -68,26 +68,116 @@ class Array
 
 end
 
-print [0,1].pad!(0)
-
 # 3. Refactored Solution
 
-
-# 4. Reflection 
-# Check it out: the following passes our pad! tests, but we know it doesn't actually do what we were required to do. Psyc!
+# My attempt at combining splat and the refactored code... it doesn't work.
 
 # class Array
 
 # 	def pad!(minimum_length, *padder_word)
-
-# 		if minimum_length > 0 
-# 			(minimum_length - self.length).times do 
-# 				self << padder_word
-# 			end	
-# 			return self
+# 		self << *padder_word until self.length >= minimum_length
+# 				return self
+# 			end
 # 		end
+
+# 	def pad(minimum_length, *padder_word)
+# 		array_clone = self.clone
+# 		array_clone << *padder_word until array_clone.length >= minimum_length
+# 		return array_clone
+# 	end
+
+# end
+
+
+########Clark GH's Solution.
+# I really like Clark's code. It's concise, it reads semantically straight across the line, and it uses self, << and until, which are all handy ruby elements. 
+#Both Clark and Octagon use "optional_value = nil" instead of my *splat method, which is probably a good thing except I still don't understand how you can define it as nil, when it's supposed to have the /option/ of being nil without /necessarily/ being nil.
+
+# class Array
+# 	def pad(min_size, optional_value = nil)
+# 		array_clone = self.clone
+# 		array_clone << optional_value until array_clone.length >= min_size
+# 		return array_clone
+# 	end
+
+# 	def pad!(min_size, optional_value = nil)
+# 		self << optional_value until self.length >= min_size
+# 		return self
 # 	end
 # end
+
+#######Ocktagon
+# class Array
+	
+# 	def pad(min_size, pad_value = nil)
+
+# 		my_array = [] + self
+#   	pad_count = min_size - my_array.length
+
+#   	unless pad_count > 0
+#   		return my_array 
+#   	else 
+#   		pad_count.times {my_array << pad_value}
+#   		return my_array
+#   	end
+
+# 	end
+
+
+# 	def pad!(min_size, pad_value = nil)
+	  
+# 	  pad_count = min_size - self.length
+  	
+#   	unless pad_count > 0
+#   		return self 
+#   	else 
+#   		pad_count.times {self << pad_value}
+#   		return self
+#   	end
+
+# 	end
+
+# end
+
+
+# class Array
+	
+# 	def pad(min_size, pad_value = nil)
+
+# 		my_array = [] + self
+#   	pad_count = min_size - my_array.length
+
+#   	unless pad_count > 0
+#   		return my_array 
+#   	else 
+#   		pad_count.times {my_array << pad_value}
+#   		return my_array
+#   	end
+
+# 	end
+
+
+# 	def pad!(min_size, pad_value = nil)
+	  
+# 	  pad_count = min_size - self.length
+  	
+#   	unless pad_count > 0
+#   		return self 
+#   	else 
+#   		pad_count.times {self << pad_value}
+#   		return self
+#   	end
+
+# 	end
+
+# end
+
+
+
+# 4. Reflection 
+#first session with using classes. it hadn't actually occurred to me until now that the inbuilt methods for ruby had explicitly been written twice, once for method and once for method! (i.e. the ! doesn't actually *do* anything by itself, only for those methods where it has already been defined.)
+# using new_array = self.clone seems like a hacky solution. it works, but it seems unecessary if there is a smarter way to approach this.
+
 
 # Overachiever time (Alyssa is insufferable, insatiable, and invaluable) --- 
 # DDT: Development Driven Testing
